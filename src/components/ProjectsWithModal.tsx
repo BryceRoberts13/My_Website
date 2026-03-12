@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { Project } from '../data/projects';
 import { ProjectModal } from './ProjectModal';
 
@@ -8,11 +8,41 @@ interface ProjectsWithModalProps {
 
 export default function ProjectsWithModal({ projects }: ProjectsWithModalProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedTag, setSelectedTag] = useState<string>('All');
+
+  const uniqueTags = useMemo(
+    () => [...new Set(projects.flatMap((p) => p.tags))].sort(),
+    [projects]
+  );
+
+  const filteredProjects =
+    selectedTag === 'All'
+      ? projects
+      : projects.filter((p) => p.tags.includes(selectedTag));
 
   return (
     <>
+      <div className="project-filter">
+        <button
+          type="button"
+          className={`project-filter-btn ${selectedTag === 'All' ? 'active' : ''}`}
+          onClick={() => setSelectedTag('All')}
+        >
+          All
+        </button>
+        {uniqueTags.map((tag) => (
+          <button
+            key={tag}
+            type="button"
+            className={`project-filter-btn ${selectedTag === tag ? 'active' : ''}`}
+            onClick={() => setSelectedTag(tag)}
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
       <div className="projects-grid">
-        {projects.map((project) => (
+        {filteredProjects.map((project) => (
           <article
             key={project.id}
             className="card"
