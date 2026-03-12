@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects } from '../data/projects';
 ---
 <Layout title="My Website">
   <main>
@@ -10,5 +12,21 @@ import About from '../components/About.astro';
       bio="Your bio goes here. Tell visitors about yourself, your background, and what you do."
       skills={['JavaScript', 'TypeScript', 'Astro', 'React']}
     />
+    <section>
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        {projects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </section>
   </main>
 </Layout>
+
+<style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+</style>
