@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import ProjectsWithModal from '../components/ProjectsWithModal';
+import Contact from '../components/Contact.astro';
 import { projects } from '../data/projects';
 ---
 <Layout title="My Website">
@@ -16,5 +17,12 @@ import { projects } from '../data/projects';
       <h2>Projects</h2>
       <ProjectsWithModal client:load projects={projects} />
     </section>
+    <Contact
+      links={[
+        { label: 'GitHub', url: 'https://github.com/yourusername' },
+        { label: 'LinkedIn', url: 'https://linkedin.com/in/yourusername' },
+        { label: 'Email', url: 'mailto:your@email.com' },
+      ]}
+    />
   </main>
 </Layout>
