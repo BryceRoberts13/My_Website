@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import ProjectsWithModal from '../components/ProjectsWithModal';
 import { projects } from '../data/projects';
 ---
 <Layout title="My Website">
@@ -14,19 +14,7 @@ import { projects } from '../data/projects';
     />
     <section>
       <h2>Projects</h2>
-      <div class="projects-grid">
-        {projects.map((project) => (
-          <ProjectCard project={project} />
-        ))}
-      </div>
+      <ProjectsWithModal client:load projects={projects} />
     </section>
   </main>
 </Layout>
-
-<style>
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-</style>
