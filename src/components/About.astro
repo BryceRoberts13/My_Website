@@ -1,0 +1,38 @@
+---
+interface Props {
+  bio: string;
+  skills?: string[];
+}
+
+const { bio, skills = [] } = Astro.props;
+---
+<section class="about" id="about">
+  <h2>About</h2>
+  <p>{bio}</p>
+  {skills.length > 0 && (
+    <ul class="skills">
+      {skills.map((s) => <li>{s}</li>)}
+    </ul>
+  )}
+</section>
+
+<style>
+  .about {
+    padding: 4rem 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .skills {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .skills li {
+    background: #333;
+    color: #fff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+</style>
