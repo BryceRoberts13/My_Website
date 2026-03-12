@@ -15,6 +15,11 @@ const { title = 'My Website' } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
     <slot />
   </body>
 </html>
