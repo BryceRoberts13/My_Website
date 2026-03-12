@@ -1,0 +1,28 @@
+---
+interface Props {
+  name: string;
+  tagline?: string;
+}
+
+const { name, tagline = 'Developer & Creator' } = Astro.props;
+---
+<section class="hero">
+  <h1>{name}</h1>
+  <p class="tagline">{tagline}</p>
+</section>
+
+<style>
+  .hero {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+  }
+  .tagline {
+    font-size: 1.25rem;
+    opacity: 0.8;
+  }
+</style>

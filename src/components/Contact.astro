@@ -1,0 +1,51 @@
+---
+interface Link {
+  label: string;
+  url: string;
+}
+
+interface Props {
+  links: Link[];
+}
+
+const { links } = Astro.props;
+---
+<section class="contact" id="contact">
+  <h2>Contact</h2>
+  <ul class="links">
+    {links.map((link) => (
+      <li>
+        <a href={link.url} target={link.url.startsWith('mailto:') ? undefined : '_blank'} rel={link.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}>
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .contact {
+    padding: 4rem 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .links a {
+    color: #333;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid #333;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .links a:hover {
+    background: #333;
+    color: #fff;
+  }
+</style>
